@@ -40,6 +40,7 @@ public class MainWindow extends JFrame
 	//private final static String author = "Douglas Chidester";
 	private static int frameWidth = 400;
 	private static int frameHeight = 285;
+	private static int padding = 3;
 	
 	private String[] conversionOptions = { "Text to Binary", "Binary to Text" ,
 			"Text to Hexadecimal", "Hexadecimal to Text" ,"Binary to Hexadecimal", "Hexadecimal to Binary" };
@@ -65,12 +66,12 @@ public class MainWindow extends JFrame
 	public MainWindow()
 	{
 		super(applicationName + version);
-		mainPanel = new JPanel(new GridLayout(0, 2, 5, 5));
+		mainPanel = new JPanel(new GridLayout(0, 2, padding, padding)); // row, col, hgap, vgap
 		
 		mainPanel.setBackground(Color.LIGHT_GRAY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(frameWidth, frameHeight);			// set frame size 
-		setLocationRelativeTo(null);					// set frame location to center of screen
+		setSize(frameWidth, frameHeight);		// set frame size 
+		setLocationRelativeTo(null);			// set frame location to center of screen
 		
 		leftTextArea = new JTextArea();
 		leftTextArea.setToolTipText("Type here.");
@@ -87,7 +88,7 @@ public class MainWindow extends JFrame
 		rightScrollPane = new JScrollPane(rightTextArea);
 		rightScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		leftLabel = new JLabel("Ascii");
+		leftLabel = new JLabel("Text");
 		leftLabel.setFont(new Font("Serif", Font.BOLD, 16));
 		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		leftLabel.setLabelFor(leftTextArea);
