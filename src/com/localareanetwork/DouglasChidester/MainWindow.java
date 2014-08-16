@@ -38,17 +38,17 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-@SuppressWarnings("serial")
-public class MainWindow extends JFrame
+public class MainWindow
 {
 	// variables
 	private static final String applicationName = "Text Converter";
-	private static final String version = " v0.8.11b";
+	private static final String version = " v0.9.0b";
 	//private final static String author = "Douglas Chidester";
 	private static int frameWidth = 400;
 	private static int frameHeight = 285;
@@ -61,6 +61,7 @@ public class MainWindow extends JFrame
 	private String hex = "Hexidecimal";
 	
 	// the UI will be divided up into left and right components
+	private JFrame mainFrame;
 	private JPanel mainPanel;
 	
 	private JTextArea leftTextArea;
@@ -74,17 +75,31 @@ public class MainWindow extends JFrame
 	private JButton convertButton;
 	private JButton clearButton;
 	
-	
 	public MainWindow()
 	{
-		super(applicationName + version);
+		super();
+		initFrame();
+		initPanel();
+		initGUIelements();
+		addComponents();
+		//pack();
+		mainFrame.setVisible(true);
+	}
+
+	/**
+	 * Create and set up the panel.
+	 */
+	private void initPanel() 
+	{
 		mainPanel = new JPanel(new GridLayout(0, 2, padding, padding)); // row, col, hgap, vgap
-		
 		mainPanel.setBackground(Color.LIGHT_GRAY);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(frameWidth, frameHeight);		// set frame size 
-		setLocationRelativeTo(null);			// set frame location to center of screen
-		
+	}
+
+	/**
+	 * Create and set up all GUI components.
+	 */
+	private void initGUIelements()
+	{
 		leftTextArea = new JTextArea();
 		leftTextArea.setToolTipText("Type here.");
 		leftTextArea.setLineWrap(true);
@@ -152,7 +167,6 @@ public class MainWindow extends JFrame
 			}
 		});
 		
-		
 		convertButton = new JButton("Convert");
 		convertButton.setBackground(new Color(255, 204, 102));
 		// when user hits convert, take text from leftTextArea and convert it based on selected option
@@ -185,12 +199,11 @@ public class MainWindow extends JFrame
 					case 5:	// h -> a -> b
 						rightTextArea.setText(ascToBin.convertString(hexToAsc.convertString(leftTextArea.getText())));
 						break;
-					default:
-						rightTextArea.setText("This should never show.");
+					default: // should never show
+						JOptionPane.showMessageDialog(mainFrame, "Invalid conversion option.", "Conversion Error!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		
 		
 		clearButton = new JButton("Clear");
 		clearButton.addActionListener(new ActionListener()
@@ -202,13 +215,22 @@ public class MainWindow extends JFrame
 				rightTextArea.setText("");
 			}
 		});
-		
-		addComponents();
-		add(mainPanel);
-		//pack();
-		setVisible(true);
 	}
 	
+	/**
+	 * Create and set attributes for the frame.
+	 */
+	private void initFrame()
+	{
+		mainFrame = new JFrame(applicationName + version);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setSize(frameWidth, frameHeight);		// set frame size 
+		mainFrame.setLocationRelativeTo(null);			// set frame location to center of screen
+	}
+
+	/**
+	 * Add GUI elements to the panel and the panel to the frame.
+	 */
 	private void addComponents()
 	{
 		mainPanel.add(leftLabel);
@@ -218,5 +240,7 @@ public class MainWindow extends JFrame
 		mainPanel.add(comboBox);
 		mainPanel.add(convertButton);
 		mainPanel.add(clearButton);
+		
+		mainFrame.add(mainPanel);
 	}
 }

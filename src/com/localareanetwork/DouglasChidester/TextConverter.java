@@ -21,7 +21,7 @@
 
 package com.localareanetwork.DouglasChidester;
 
-public class Main {
+public class TextConverter {
 
 	/**
 	 * @param args
