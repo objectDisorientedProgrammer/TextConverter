@@ -33,11 +33,16 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -48,8 +53,8 @@ public class MainWindow
 {
 	// variables
 	private static final String applicationName = "Text Converter";
-	private static final String version = " v0.9.0b";
-	//private final static String author = "Douglas Chidester";
+	private static final String version = " v0.9.1b";
+	private final static String author = "Douglas Chidester";
 	private static int frameWidth = 400;
 	private static int frameHeight = 285;
 	private static int padding = 3;
@@ -75,11 +80,15 @@ public class MainWindow
 	private JButton convertButton;
 	private JButton clearButton;
 	
+	// Images
+	String imagePath = "/images/";	// path in jar file
+	
 	public MainWindow()
 	{
 		super();
 		initFrame();
 		initPanel();
+		createMenubar();
 		initGUIelements();
 		addComponents();
 		//pack();
@@ -226,6 +235,56 @@ public class MainWindow
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setSize(frameWidth, frameHeight);		// set frame size 
 		mainFrame.setLocationRelativeTo(null);			// set frame location to center of screen
+	}
+	
+	/**
+	 * Create and add a menu bar to the frame.
+	 */
+	private void createMenubar()
+	{
+		JMenuBar menuBar = new JMenuBar();
+        mainFrame.setJMenuBar(menuBar);
+        
+        JMenu fileMenu = new JMenu("File");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+        menuBar.add(fileMenu);
+        
+        JMenuItem menuItemExit = new JMenuItem("Exit", new ImageIcon(this.getClass().getResource(imagePath+"exit.png")));
+        menuItemExit.setMnemonic(KeyEvent.VK_E);
+        menuItemExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.dispose(); // close program if user clicks: File -> Exit
+			}
+		});
+        fileMenu.add(menuItemExit);
+        
+        JMenu helpMenu = new JMenu("Help");
+        helpMenu.setMnemonic(KeyEvent.VK_H);
+        menuBar.add(helpMenu);
+        
+        JMenuItem menuItemGettingStarted = new JMenuItem("Getting Started", new ImageIcon(this.getClass().getResource(imagePath+"help.png")));
+        menuItemGettingStarted.setMnemonic(KeyEvent.VK_G);
+        menuItemGettingStarted.setToolTipText("Basic useage instructions");
+        menuItemGettingStarted.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// show basic use instructions if user clicks: Help -> Getting Started
+				JOptionPane.showMessageDialog(null, "Assumes 8 bits for binary and 2 digits for hex.", "Getting Started",
+						JOptionPane.PLAIN_MESSAGE, new ImageIcon(this.getClass().getResource(imagePath+"help64.png")));
+			}
+		});
+        helpMenu.add(menuItemGettingStarted);
+        
+        JMenuItem menuItemAbout = new JMenuItem("About", new ImageIcon(this.getClass().getResource(imagePath+"about.png")));
+        menuItemAbout.setMnemonic(KeyEvent.VK_A);
+        menuItemAbout.setToolTipText("About this program");
+        menuItemAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// show credits & version if user clicks: Help -> About
+				JOptionPane.showMessageDialog(null, "Created by " + author + "\nVersion " + version, "About",
+						JOptionPane.INFORMATION_MESSAGE, new ImageIcon(this.getClass().getResource(imagePath+"person.png")));
+			}
+		});
+        helpMenu.add(menuItemAbout);
 	}
 
 	/**
