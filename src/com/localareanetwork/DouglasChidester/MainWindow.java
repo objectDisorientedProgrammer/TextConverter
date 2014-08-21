@@ -20,10 +20,7 @@
  *   make window and components resize
  *   add 'tab' key
  *   add read/write to file option?
- *   stop extending jframe
- *   make a initComponents() method
  *   check for invalid input text/binary/hex
- *   combobox change listener
  */
 
 package com.localareanetwork.DouglasChidester;
@@ -91,7 +88,6 @@ public class MainWindow
 		createMenubar();
 		initGUIelements();
 		addComponents();
-		//pack();
 		mainFrame.setVisible(true);
 	}
 
