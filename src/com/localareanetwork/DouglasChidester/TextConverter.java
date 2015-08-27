@@ -2,7 +2,7 @@
  * Created: August 22, 2013 around 11:00PM
  * Author: Douglas Chidester
  * 
- * Description: Converts text to binary and/or hex and back.
+ * Description: Converts ASCII text to binary and/or hex and back.
  *  Copyright (C) 2013  Douglas Chidester
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -21,14 +21,17 @@
 
 package com.localareanetwork.DouglasChidester;
 
-public class TextConverter {
-
-	/**
-	 * @param args
-	 */
+public class TextConverter
+{
 	public static void main(String[] args)
 	{
-		new MainWindow();
+		javax.swing.SwingUtilities.invokeLater(new Runnable()
+		{
+            public void run()
+            {
+            	new MainWindow();
+            }
+        });
 	}
 
 }

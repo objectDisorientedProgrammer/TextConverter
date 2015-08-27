@@ -16,6 +16,8 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * 
  * To Do
  *   make window and components resize
  *   add 'tab' key
@@ -139,6 +141,7 @@ public class MainWindow
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				// TODO convert on different selection type.
 				switch(comboBox.getSelectedIndex())
 				{
 					case 0:	// a -> b
@@ -180,10 +183,13 @@ public class MainWindow
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				// TODO clean this up
 				AsciiToBinaryConverter ascToBin = new AsciiToBinaryConverter();
 				BinaryToAsciiConverter binToAsc = new BinaryToAsciiConverter();
 				AsciiToHexConverter ascToHex = new AsciiToHexConverter();
 				HexToAsciiConverter hexToAsc = new HexToAsciiConverter();
+				
+				// TODO maybe add this switch into its own action listener so multiple things can use it
 				switch(comboBox.getSelectedIndex())
 				{
 					case 0:	// a -> b
