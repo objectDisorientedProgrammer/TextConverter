@@ -51,14 +51,12 @@ public class AsciiToHexConverter
 	 */
 	public String convertString(String sentence)
 	{
-		String toDo;
 		StringBuilder newStr = new StringBuilder();
+		
 		int end = sentence.length();
 		for(int i = 0; i < end; i++)
-		{
-			toDo = sentence.substring(i, i+1);
-			newStr.append(asciiToHex.get(toDo));
-		}
+			newStr.append(asciiToHex.get(sentence.substring(i, i+1)));
+
 		return newStr.toString();
 	}
 	
@@ -119,7 +117,7 @@ public class AsciiToHexConverter
 		asciiToHex.put("y", "79");
 		asciiToHex.put("z", "7A");
 		// whitespace
-		asciiToHex.put(" ", "20 ");		// space
+		asciiToHex.put(" ", "20");		// space
 		asciiToHex.put("\n", "0A\n");	// line feed
 		asciiToHex.put("\r", "0D\r");	// carriage return
 		// punctuation

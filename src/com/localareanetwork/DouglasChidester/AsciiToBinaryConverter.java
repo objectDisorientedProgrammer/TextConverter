@@ -51,14 +51,12 @@ public class AsciiToBinaryConverter
 	 */
 	public String convertString(String sentence)
 	{
-		String toDo;
 		StringBuilder newStr = new StringBuilder();
+		
 		int end = sentence.length();
 		for(int i = 0; i < end; i++)
-		{
-			toDo = sentence.substring(i, i+1);
-			newStr.append(asciiToBinary.get(toDo));
-		}
+			newStr.append(asciiToBinary.get(sentence.substring(i, i+1)));
+		
 		return newStr.toString();
 	}
 	
@@ -119,7 +117,7 @@ public class AsciiToBinaryConverter
 		asciiToBinary.put("y", "01111001");
 		asciiToBinary.put("z", "01111010");
 		// whitespace
-		asciiToBinary.put(" ", "00100000 ");		// space
+		asciiToBinary.put(" ", "00100000");		// space
 		asciiToBinary.put("\n", "00001010\n");	// line feed
 		asciiToBinary.put("\r", "00001101\r");	// carriage return
 		// punctuation

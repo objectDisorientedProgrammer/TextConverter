@@ -51,14 +51,12 @@ public class BinaryToAsciiConverter
 	 */
 	public String convertString(String sentence)
 	{
-		String toDo;
 		StringBuilder newStr = new StringBuilder();
+		
 		int end = sentence.length();
 		for(int i = 0; i < end; i+=8)
-		{
-			toDo = sentence.substring(i, i+8);
-			newStr.append(binaryToAscii.get(toDo));
-		}
+			newStr.append(binaryToAscii.get(sentence.substring(i, i+8).trim()));
+		
 		return newStr.toString();
 	}
 

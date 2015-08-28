@@ -52,9 +52,11 @@ public class HexToAsciiConverter
 	public String convertString(String sentence)
 	{
 		StringBuilder newStr = new StringBuilder();
+		
 		int end = sentence.length();
-		for(int i = 0; i < end; i+=2)
-			newStr.append(hexToAscii.get(sentence.substring(i, i+2).toUpperCase()));
+		for(int i = 0; i < end; i += 2)
+			newStr.append(hexToAscii.get(sentence.substring(i, i+2).toUpperCase().trim()));
+		
 		return newStr.toString();
 	}
 	
