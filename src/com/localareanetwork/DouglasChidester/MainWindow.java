@@ -52,7 +52,7 @@ public class MainWindow
 {
 	// variables
 	private static final String applicationName = "Text Converter";
-	private static final String version = " v0.9.1b";
+	private static final String version = " v0.9.2b";
 	private final static String author = "Douglas Chidester";
 	private static int frameWidth = 400;
 	private static int frameHeight = 285;
@@ -109,7 +109,7 @@ public class MainWindow
 	{
 		leftTextArea = new JTextArea();
 		leftTextArea.setToolTipText("Type here.");
-		leftTextArea.setLineWrap(true);
+		leftTextArea.setWrapStyleWord(true);
 		leftTextArea.setTabSize(4);
 		
 		leftScrollPane = new JScrollPane(leftTextArea);
@@ -117,7 +117,7 @@ public class MainWindow
 		
 		rightTextArea = new JTextArea();
 		rightTextArea.setEditable(false);
-		rightTextArea.setLineWrap(true);
+		rightTextArea.setWrapStyleWord(true);
 		
 		rightScrollPane = new JScrollPane(rightTextArea);
 		rightScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -183,36 +183,50 @@ public class MainWindow
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				// TODO clean this up
-				AsciiToBinaryConverter ascToBin = new AsciiToBinaryConverter();
-				BinaryToAsciiConverter binToAsc = new BinaryToAsciiConverter();
-				AsciiToHexConverter ascToHex = new AsciiToHexConverter();
-				HexToAsciiConverter hexToAsc = new HexToAsciiConverter();
+				AsciiToBinaryConverter ascToBin;
+				BinaryToAsciiConverter binToAsc;
+				AsciiToHexConverter ascToHex;
+				HexToAsciiConverter hexToAsc;
 				
 				// TODO maybe add this switch into its own action listener so multiple things can use it
-				switch(comboBox.getSelectedIndex())
+				try
 				{
-					case 0:	// a -> b
-						rightTextArea.setText(ascToBin.convertString(leftTextArea.getText()));
-						break;
-					case 1:	// b -> a
-						rightTextArea.setText(binToAsc.convertString(leftTextArea.getText()));
-						break;
-					case 2:	// t -> h
-						rightTextArea.setText(ascToHex.convertString(leftTextArea.getText()));
-						break;
-					case 3:	// h -> t
-						rightTextArea.setText(hexToAsc.convertString(leftTextArea.getText()));
-						break;
-					case 4:	// b -> a -> h
-						rightTextArea.setText(ascToHex.convertString(binToAsc.convertString(leftTextArea.getText())));
-						break;
-					case 5:	// h -> a -> b
-						rightTextArea.setText(ascToBin.convertString(hexToAsc.convertString(leftTextArea.getText())));
-						break;
-					default: // should never show
-						JOptionPane.showMessageDialog(mainFrame, "Invalid conversion option.", "Conversion Error!", JOptionPane.ERROR_MESSAGE);
+					switch(comboBox.getSelectedIndex())
+					{
+						case 0:	// a -> b
+							ascToBin = new AsciiToBinaryConverter();
+							rightTextArea.setText(ascToBin.convertString(leftTextArea.getText()));
+							break;
+						case 1:	// b -> a
+							binToAsc = new BinaryToAsciiConverter();
+							rightTextArea.setText(binToAsc.convertString(leftTextArea.getText()));
+							break;
+						case 2:	// t -> h
+							ascToHex = new AsciiToHexConverter();
+							rightTextArea.setText(ascToHex.convertString(leftTextArea.getText()));
+							break;
+						case 3:	// h -> t
+							hexToAsc = new HexToAsciiConverter();
+							rightTextArea.setText(hexToAsc.convertString(leftTextArea.getText()));
+							break;
+						case 4:	// b -> a -> h
+							ascToHex = new AsciiToHexConverter();
+							binToAsc = new BinaryToAsciiConverter();
+							rightTextArea.setText(ascToHex.convertString(binToAsc.convertString(leftTextArea.getText())));
+							break;
+						case 5:	// h -> a -> b
+							ascToBin = new AsciiToBinaryConverter();
+							hexToAsc = new HexToAsciiConverter();
+							rightTextArea.setText(ascToBin.convertString(hexToAsc.convertString(leftTextArea.getText())));
+							break;
+						default: // should never show
+							JOptionPane.showMessageDialog(mainFrame, "Invalid conversion option.", "Conversion Error!", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (Exception e2)
+				{
+					JOptionPane.showMessageDialog(mainFrame, "Invalid conversion option.", "Conversion Error!", JOptionPane.ERROR_MESSAGE);
 				}
+				
 			}
 		});
 		
