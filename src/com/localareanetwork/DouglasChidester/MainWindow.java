@@ -44,6 +44,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -251,6 +252,9 @@ public class MainWindow
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setSize(frameWidth, frameHeight);		// set frame size 
 		mainFrame.setLocationRelativeTo(null);			// set frame location to center of screen
+		mainFrame.setUndecorated(true);
+		mainFrame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+		//mainFrame.setIconImage(new ImageIcon(imgURL).getImage());
 	}
 	
 	/**
