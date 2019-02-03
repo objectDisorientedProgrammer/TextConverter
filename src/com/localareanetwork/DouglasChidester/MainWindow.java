@@ -19,10 +19,9 @@
  * 
  * 
  * To Do
- *   make window and components resize
  *   add 'tab' key
  *   add read/write to file option?
- *   check for invalid input text/binary/hex
+ *   check for invalid input text/binary/hex - partially done
  */
 
 package com.localareanetwork.DouglasChidester;
@@ -250,11 +249,9 @@ public class MainWindow
 	{
 		mainFrame = new JFrame(applicationName + version);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(frameWidth, frameHeight);		// set frame size 
-		mainFrame.setLocationRelativeTo(null);			// set frame location to center of screen
-		mainFrame.setUndecorated(true);
-		mainFrame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
-		//mainFrame.setIconImage(new ImageIcon(imgURL).getImage());
+		mainFrame.setSize(frameWidth, frameHeight); // set frame size 
+		mainFrame.setLocationRelativeTo(null); // set frame location to center of screen
+		mainFrame.setUndecorated(false); // enable default OS window boarders
 	}
 	
 	/**
@@ -308,7 +305,7 @@ public class MainWindow
 	}
 
 	/**
-	 * Add GUI elements to the panel and the panel to the frame.
+	 * Add GUI elements to the panel (order matters) and the panel to the frame.
 	 */
 	private void addComponents()
 	{
